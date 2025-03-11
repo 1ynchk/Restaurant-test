@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # development 
+    'livereload',
     'django.contrib.staticfiles',
     
     # apps
@@ -26,6 +28,10 @@ INSTALLED_APPS = [
     'orders',
     'main'
 ]
+
+# development
+LIVERELOAD_HOST = '127.0.0.1'
+LIVERELOAD_PORT = '8001'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -35,6 +41,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # development 
+    "livereload.middleware.LiveReloadScript",
 ]
 
 ROOT_URLCONF = 'restaurant.urls'
@@ -42,7 +51,7 @@ ROOT_URLCONF = 'restaurant.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'base_templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -53,6 +62,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+STATICFILES_DIRS = [
+    BASE_DIR / "base_static",
 ]
 
 WSGI_APPLICATION = 'restaurant.wsgi.application'

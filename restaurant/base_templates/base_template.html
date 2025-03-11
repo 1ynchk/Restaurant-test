@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load livereload_tags %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}" />
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+    {% block head %}
+
+    {% endblock %}
+    <title>Restaurant</title>
+    {% livereload_script %}
+    <script src="{% static 'js/copy-text.js' %}" defer></script>
+</head>
+
+<body>
+    <div class="header-wrapper">
+        <div class="container">
+            <header class="header">
+                <a href="{% url 'main-page' %}" class="header-logo-container">
+                    <img class="header-logo" src='{% static "images/logo.png" %}' />
+                    <div class="header-logo-title">Restaurant</div>
+                </a>
+                <div class="header-navigate">
+                    <a href="">
+                        <nav class="header-navigate-el">
+                            Оформить заказ
+                        </nav>
+                    </a>
+                    <a>
+                        <nav class="header-navigate-el">
+                            Меню
+                        </nav>
+                    </a>
+                    <a href="#" class="header-sign-in">
+                        Войти
+                    </a>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <div class="main-content">
+        {% block main %}
+
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+        <div class="footer-address">
+            Paper Street av. 7 1408
+        </div>
+        <div class="footer-contacts">
+            <a  
+                target="_blank"
+                href="https://t.me/ycnhk1" 
+                class="footer-containter-anchor">
+                <img src="{% static 'images/tg.png' %}" class="footer-img" />
+                <div class="footer-p">Мы в Telegram</div>
+            </a>
+            <button
+                id="copy-email-button"
+                class="footer-containter-anchor">
+                <img src="{% static 'images/email.jpg' %}" class="footer-img" />
+                <div id="email-copy" class="footer-p">saspery@yandex.ru</div>
+            </button>
+        </div>
+        <div class="footer-text-copied">
+            Текст скопирован!
+        </div>
+    </footer>
+
+</body>
+
+</html>
