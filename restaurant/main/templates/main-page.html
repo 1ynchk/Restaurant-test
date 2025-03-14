@@ -7,9 +7,28 @@
 {% endblock %}
 
 {% block main %}
-<div class="main-page">
-    <div class="container">
+{% if messages %}
+<div id="popup-sign-in-wrapper-warn" class="popup-sign-in-wrapper active">
+    <div class="popup-sign-in">
+        <div class="popup-is-auth-container">
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <img src="{% static 'images/cross.png' %}" />
+            <div>{{ message }}</div>
+            <button id="to-register" class="popup-form-btn">
+                Понятно
+            </button>
+            {% elif message.tags == 'success' %}
+            <img class="popup-is-auth-img" src="{% static 'images/arrow_confirm.png' %}" />
+            <div>{{ message }}</div>
+            <button id="to-register" class="popup-form-btn">
+                Понятно
+            </button>
+            {% endif %}
+            {% endfor %}
+        </div>
 
     </div>
 </div>
+{% endif %}
 {% endblock %}

@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/popup.css' %}" />
     <link rel="icon" href="{% static 'images/favicon.ico' %}" />
     {% block head %}
 
@@ -16,9 +17,78 @@
     <title>Restaurant</title>
     {% livereload_script %}
     <script src="{% static 'js/copy-text.js' %}" defer></script>
+    <script src="{% static 'js/popup.js' %}" defer></script>
 </head>
 
 <body>
+
+    <div class="popup-sign-in-wrapper">
+        <div class="popup-sign-in">
+            <div id="popup-title" class="popup-title">Авторизация</div>
+            <form
+                action="{% url 'login-view' %}" 
+                id="form-login" 
+                class="form-popup login" 
+                method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label 
+                        for="{{ form_login.email.id_for_label }}" 
+                        class="form-label">{{ form_login.email.label }}</label>
+                    {{ form_login.email }}
+                </div>
+
+                <div class="form-group">
+                    <label 
+                        for="{{ form_login.password.id_for_label }}" 
+                        class="form-label">{{ form_login.password.label }}</label>
+                    {{ form_login.password }}
+                </div>
+                <button type="submit" class="popup-form-btn">
+                    Отправить
+                </button>
+            </form>
+
+            <form 
+                action="{% url 'register-view' %}"
+                id="form-register" 
+                class="form-popup register concealed display-none" 
+                method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label 
+                        for="{{ form_register.email.id_for_label }}" 
+                        class="form-label">{{ form_register.email_register.label }}</label>
+                    {{ form_register.email_register }}
+                </div>
+
+                <div class="form-group">
+                    <label 
+                        for="{{ form_register.password_register.id_for_label }}" 
+                        class="form-label">{{ form_register.password_register.label }}</label>
+                    {{ form_register.password_register }}
+                </div>
+                <div class="form-group">
+                    <label 
+                        for="{{ form_register.password_confirm_register.id_for_label }}" 
+                        class="form-label">{{ form_register.password_confirm_register.label }}</label>
+                    {{ form_register.password_confirm_register }}
+                </div>
+                <button type="submit" class="popup-form-btn">
+                    Отправить
+                </button>
+            </form>
+            <div class="popup-container">
+                <div id="popup-container-incription">Нет аккаунта?</div>
+                <button 
+                    id="change-mode" 
+                    class="popup-sign-up-btn">
+                    Зарегистрироваться
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="header-wrapper">
         <div class="container">
             <header class="header">
@@ -37,9 +107,18 @@
                             Меню
                         </nav>
                     </a>
-                    <a href="#" class="header-sign-in">
+                    {% if user.is_authenticated  %}
+                        <div class="header-profile-container">
+                            <img 
+                                src="{% static 'images/profile.png' %}" 
+                                class="header-profile-container-img" />
+                            <div class="header-profile-title">Профиль</div>
+                        </div>
+                    {% else %}
+                    <button id="sign-in-btn" class="header-sign-in">
                         Войти
-                    </a>
+                    </button>
+                    {% endif %}
                 </div>
             </header>
         </div>
@@ -56,16 +135,11 @@
             Paper Street av. 7 1408
         </div>
         <div class="footer-contacts">
-            <a  
-                target="_blank"
-                href="https://t.me/ycnhk1" 
-                class="footer-containter-anchor">
+            <a target="_blank" href="https://t.me/ycnhk1" class="footer-containter-anchor">
                 <img src="{% static 'images/tg.png' %}" class="footer-img" />
                 <div class="footer-p">Мы в Telegram</div>
             </a>
-            <button
-                id="copy-email-button"
-                class="footer-containter-anchor">
+            <button id="copy-email-button" class="footer-containter-anchor">
                 <img src="{% static 'images/email.jpg' %}" class="footer-img" />
                 <div id="email-copy" class="footer-p">saspery@yandex.ru</div>
             </button>

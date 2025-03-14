@@ -7,6 +7,7 @@ class Users(AbstractUser):
 
     id = ULIDField(default=default, editable=False, primary_key=True)
     email = models.EmailField(unique=True, max_length=200)
+    username = models.CharField(max_length=10, unique=False)
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username'] 

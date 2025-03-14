@@ -1,0 +1,116 @@
+.popup-sign-in-wrapper {
+    z-index: 3;
+    background-color: rgba(50, 50, 50, 0.5);
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s ease;
+    cursor: pointer;
+}
+
+.popup-sign-in-wrapper.active {
+    visibility: initial;
+    opacity: 1;
+}
+
+.popup-sign-in {
+    background-color: white;
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+    cursor: default;
+    padding: 20px;
+}
+
+.popup-title {
+    font-size: 22px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.popup-form-btn {
+    margin-top: 50px;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 10px 0px;
+    color: rgb(50, 50, 50);
+    width: 100%;
+    background-color: orange;
+}
+
+.form-popup {
+    transition: .3s ease;
+    margin-top: 50px;
+}
+
+.popup-container {
+    margin-top: 20px;
+    display: flex;
+}
+
+.popup-span {
+    color: orange;
+}
+
+.popup-sign-up-btn {
+    margin-left: 10px;
+    color: orange;
+    transition: .3s ease;
+}
+
+.popup-sign-up-btn:hover {
+    transform: scale(1.02);
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-popup.login.concealed {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.form-popup.login.concealed.display-none {
+    display: none;
+}
+
+.form-popup.register.concealed {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.form-popup.register.concealed.display-none {
+    display: none;
+}
+
+.popup-is-auth-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.popup-is-auth-img {
+    width: 200px;
+}

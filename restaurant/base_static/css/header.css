@@ -28,7 +28,7 @@
 }
 
 .header-navigate {
-    width: 33%;
+    width: 40%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -48,4 +48,21 @@
 
 .header-sign-in:hover {
     transform: scale(1.05);
+}
+
+.header-profile-container {
+    display: flex;
+    background-color: white;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.header-profile-title {
+    color: black;
+}
+
+.header-profile-container-img {
+    width: 30px;
+    margin-right: 10px;
 }

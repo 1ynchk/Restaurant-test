@@ -1,0 +1,14 @@
+.main-page-auth-container {
+    height: 90vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-page-auth-img {
+    width: 200px;
+}
+
+.main-page-auth-title {
+    font-size: 22px;
+}
