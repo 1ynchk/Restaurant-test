@@ -114,3 +114,26 @@ input[type="password"] {
 .popup-is-auth-img {
     width: 200px;
 }
+
+.popup-sign-in-wrapper-login-required {
+    z-index: 3;
+    background-color: rgba(50, 50, 50, 0.5);
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s ease;
+    cursor: pointer;
+}
+
+.popup-sign-in-wrapper-login-required.active {
+    visibility: initial;
+    opacity: 1;
+}
+
+.popup-is-auth-comment {
+    margin-top: 20px;
+}

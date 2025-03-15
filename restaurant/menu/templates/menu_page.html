@@ -1,0 +1,64 @@
+{% extends 'base_template.html' %}
+
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/menu-page.css' %}" />
+<script src="{% static 'js/search.js' %}" defer></script>
+{% endblock %}
+
+{% block main %}
+
+<div class="menu-welcome-wrapper">
+    <div class="menu-welcome-container">
+        <img class="menu-welcome-logo" src="{% static 'images/logo-no-text.png' %}" />
+        <h1 class="menu-welcome-title">Оформите заказ прямо сейчас!</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="menu-page">
+        <div class="search-container">
+            <input class="search-input" type="text" placeholder="Введите название блюда..." />
+            <img id="search-btn" class="search-img" alt="search" src="{% static 'images/search.png' %}" />
+        </div>
+        <div class="menu-container">
+            {% if menu %}
+            {% for pleat in menu %}
+            <div class="pleat-container">
+                <div class="pleat-name">
+                    {{ pleat.name}}
+                </div>
+                <div class="pleat-category">
+                    <b>Категория:</b>
+                    <br>
+                    <br>
+                    {{ pleat.cat }}
+                </div>
+                <div class="pleat-desc">
+                    <b>Состав:</b>
+                    <br>
+                    <br>
+                    {% if pleat.desc|length > 0 %}
+                    {{ pleat.desc }}
+                    {% elif pleat.desc|length == 0 %}
+                    <div>Отсутствует</div>
+                    {% endif %}
+                </div>
+                <div class="pleat-price-container">
+                    <div class="pleat-price">
+                        <b>Цена:</b> <span class="pleat-price-span">{{ pleat.price }}</span>
+                    </div>
+                    <a href="{% url 'orders-view' %}" class="pleat-btn-order">
+                        К заказу
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

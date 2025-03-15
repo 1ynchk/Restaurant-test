@@ -4,7 +4,7 @@
 
 .header {
     color: white;
-    padding: 15px 25px;
+    padding: 15px 0px;
     display: flex;
 
     justify-content: space-between;
@@ -66,3 +66,62 @@
     width: 30px;
     margin-right: 10px;
 }
+
+.profile-wrapper {
+    position: relative;
+}
+
+.profile-drop-list-container {
+    visibility: hidden;
+    opacity: 0;
+    border-radius: 10px;
+    height: fit-content;
+    width: 120px;
+    background-color: white;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    padding: 15px 10px;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    transition: opacity 0.3s ease;
+}
+
+.profile-wrapper:hover .profile-drop-list-container {
+    visibility: visible;
+    opacity: 1;
+}
+
+.profile-drop-list-container::before {
+    content: "";
+    position: absolute;
+    top: -10px; 
+    left: 50%; 
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid white; 
+    background-color: transparent;
+}
+
+.profile-drop-list-el-img {
+    width: 20px;
+}
+
+.profile-drop-list-el {
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profile-drop-list-el-title {
+    color: rgb(50, 50, 50);
+}
+
+.header-nav-btn {
+    background-color: transparent;
+    color: white;
+}
+

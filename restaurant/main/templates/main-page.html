@@ -2,7 +2,6 @@
 
 {% load static %}
 {% block head %}
-
 <link rel="stylesheet" type="text/css" href="{% static 'css/main-page.css' %}" />
 {% endblock %}
 
@@ -27,8 +26,71 @@
             {% endif %}
             {% endfor %}
         </div>
-
     </div>
 </div>
 {% endif %}
+<div class="container">
+    <div class="main-page">
+        <div class="main-page-wrapper">
+            <div class="main-page-container">
+                <div class="main-page-tag">
+                    #МЕНЮ
+                </div>
+                <h2 class="main-page-title">
+                    Наша кухня
+                </h2>
+                <p class="main-page-p">
+                    Вы можете ознакомиться с меню нашего ночного клуба, где представлены лучшие блюда и закуски для
+                    вашего идеального вечера.
+                </p>
+                <a href="{% url 'menu-page' %}" class="main-page-menu-a">
+                    Меню
+                </a>
+            </div>
+            <img class="main-page-menu-img" alt="menu" src="{% static 'images/menu.png' %}" />
+        </div>
+        <div class="main-page-wrapper">
+            <img class="main-page-menu-img coffee" alt="coffee" src="{% static 'images/coffee.png' %}" />
+            <div class="main-page-container">
+                <div class="main-page-tag">
+                    #ЗАКАЗ
+                </div>
+                <h2 class="main-page-title">
+                    Оформление заказа – просто и удобно!
+                </h2>
+                <p class="main-page-p">
+                    Наслаждайтесь вкусными блюдами без лишних хлопот! Закажите любимые блюда через наш сайт в пару
+                    кликов.
+                </p>
+                <ul class="main-page-ul">
+                    <div class="main-page-li-container">
+                        <div class="main-page-li-dot"></div>
+                        <li class="main-page-li">Перейдите к оформлению заказа</li>
+                    </div>
+                    <div class="main-page-li-container">
+                        <div class="main-page-li-dot"></div>
+                        <li class="main-page-li">Выберите блюда из меню</li>
+                    </div>
+                    <div class="main-page-li-container">
+                        <div class="main-page-li-dot"></div>
+                        <li class="main-page-li">Заказ оформлен!</li>
+                    </div>
+                </ul>
+                <p class="main-page-p">
+                    Готовим с любовью и заботой!
+                </p>
+
+                {% if user.is_authenticated %}
+                <a href="{% url 'orders-view' %}" class="main-page-menu-a">
+                    К заказу
+                </a>
+                {% else %}
+                <button id="main-page-nav-login-required" class="main-page-menu-a">
+                    К заказу
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

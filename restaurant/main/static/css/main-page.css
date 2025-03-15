@@ -1,5 +1,8 @@
+.main-page {
+    margin-top: 40px;
+}
+
 .main-page-auth-container {
-    height: 90vh; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,4 +14,73 @@
 
 .main-page-auth-title {
     font-size: 22px;
+}
+
+.main-page-menu-img {
+    width: 30%;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.main-page-wrapper {
+    display: flex;
+    padding: 0px 20px;
+    justify-content: space-between;
+    align-items: center;
+    height: 60vh;
+}
+
+.main-page-ul {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main-page-container {
+    width: 50%;
+}
+
+.main-page-tag {
+    color: orange;
+}
+
+.main-page-title {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.main-page-p {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+.main-page-menu-a {
+    background-color: orange;
+    padding: 15px 30px;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: .3s ease;
+}
+
+.main-page-menu-img.coffee {
+    width: 40%;
+    box-shadow: none;
+}
+
+.main-page-li-container {
+    display: flex;
+    align-items: center;
+}
+
+.main-page-li {
+    margin-left: 10px;
+}
+
+.main-page-li-dot {
+    width: 10px;
+    border-radius: 30px;
+    height: 10px;
+    background-color: orange;
 }

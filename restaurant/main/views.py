@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from .forms import RegistrationForm, SignInForm
 from users.models import Users
@@ -54,5 +55,4 @@ def register_view(request):
             messages.error(request, 'Пароли не совпадают.')
             return redirect ('main-page')
 
-        
                 
