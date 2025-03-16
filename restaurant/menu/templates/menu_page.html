@@ -12,7 +12,7 @@
 <div class="menu-welcome-wrapper">
     <div class="menu-welcome-container">
         <img class="menu-welcome-logo" src="{% static 'images/logo-no-text.png' %}" />
-        <h1 class="menu-welcome-title">Оформите заказ прямо сейчас!</h1>
+        <h2 class="menu-welcome-title">Оформите заказ прямо сейчас!</h2>
     </div>
 </div>
 
@@ -22,7 +22,7 @@
             <input class="search-input" type="text" placeholder="Введите название блюда..." />
             <img id="search-btn" class="search-img" alt="search" src="{% static 'images/search.png' %}" />
         </div>
-        <div class="menu-container">
+        <div class="menu-container" arg-type="menu-page">
             {% if menu %}
             {% for pleat in menu %}
             <div class="pleat-container">

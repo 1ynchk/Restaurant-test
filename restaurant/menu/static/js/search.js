@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.querySelector(".search-input")
     const menuContainer = document.querySelector(".menu-container")
     const searchBtn = document.getElementById('search-btn')
@@ -9,11 +9,16 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch(`/search/?q=${query}`)
             .then(response => response.json())
             .then(data => {
-                menuContainer.innerHTML = "" 
+                menuContainer.innerHTML = ""
 
                 data.results.forEach(pleat => {
                     let pleatDiv = document.createElement("div")
                     pleatDiv.classList.add("pleat-container")
+
+                    const menuContainerArg = menuContainer.getAttribute('arg-type')
+                    if (menuContainerArg == 'orders-page') {
+                        pleatDiv.classList.add('order-pleat-container')
+                    }
 
                     pleatDiv.innerHTML = `
                         <div class="pleat-name">${pleat.name}</div>

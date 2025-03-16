@@ -1,9 +1,108 @@
 {% extends 'base_template.html' %}
 
-{% block head %}
+{% load static %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/orders-page.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/menu-page.css' %}" />
+<script src="{% static 'js/search.js' %}" defer></script>
+<script src="{% static 'js/create-order.js' %}" defer></script>
 {% endblock %}
 
 {% block main %}
-<div>orders</div>
+<div id="popup-sign-in-wrapper-warn" class="popup-sign-in-wrapper">
+    <div class="popup-sign-in">
+        <div class="popup-is-auth-container">
+            <img src="{% static 'images/cross.png' %}" />
+            <div class="order-warn-message"></div>
+            <button class="popup-form-btn to-register">
+                Понятно
+            </button>
+        </div>
+    </div>
+</div>
+<div class="menu-welcome-wrapper">
+    <div class="menu-welcome-container">
+        <img class="menu-welcome-logo" src="{% static 'images/logo-no-text.png' %}" />
+        <h2 class="menu-welcome-title">Оформление заказа</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="orders-page">
+        <div class="orders-page-container">
+            <div class="orders-page-title">Выберите столик:</div>
+            <div class="orders-tables">
+                {% for table in ''|rjust:amount_tables %}
+                {% with forloop.counter as table_number %}
+                <button state-taken-table="{{ table_number }}"
+                    class="orders-table {% if table_number in taken_tables %}taken{% endif %}">
+                    {{ table_number }}
+                </button>
+                {% endwith %}
+                {% endfor %}
+            </div>
+            <div class="orders-page-confirm-container">
+                <div class="orders-page-title">Подтверждение заказа:</div>
+                <div class="orders-page-confirm-table">
+                    <div class="orders-page-p">Выбранный столик:</div>
+                    <div class="table-confirmation" id="confirm-choisen-table">Столик не выбран</div>
+                    <div class="orders-page-p">Ваш заказ:</div>
+                    <div id="orders-page-user-order" class="orders-page-user-order">
+                        <div class="orders-page-user-order-empty">Ваш заказ пока что пуст</div>
+                    </div>
+                    <div class="orders-page-p">Общая сумма заказа:</div>
+                    <div id="total-price-order" class="table-confirmation">0&#8381;</div>
+                    <button id="orders-page-btn-submit-id" disabled="true"
+                        class="orders-page-btn-submit">Создать</button>
+                </div>
+            </div>
+        </div>
+        <div class="orders-page-orders-container">
+            <div class="search-container">
+                <input class="search-input" type="text" placeholder="Введите название блюда..." />
+                <img id="search-btn" class="search-img" alt="search" src="{% static 'images/search.png' %}" />
+            </div>
+            <div class="orders-page-container order-pleats">
+                <div class="menu-container" arg-type="orders-page">
+                    {% if menu %}
+                    {% for pleat in menu %}
+                    <div class="pleat-container order-pleat-container">
+                        <div class="pleat-name">
+                            {{ pleat.name }}
+                        </div>
+                        <div class="pleat-category">
+                            <b>Категория:</b>
+                            <br>
+                            <br>
+                            {{ pleat.cat }}
+                        </div>
+                        <div class="pleat-desc">
+                            <b>Состав:</b>
+                            <br>
+                            <br>
+                            {% if pleat.desc|length > 0 %}
+                            {{ pleat.desc }}
+                            {% elif pleat.desc|length == 0 %}
+                            <div>Отсутствует</div>
+                            {% endif %}
+                        </div>
+                        <div class="pleat-price-container ">
+                            <div class="pleat-price">
+                                <b>Цена:</b> <span class="pleat-price-span">{{ pleat.price }}</span>
+                            </div>
+                            <button class="pleat-btn-order orders_page" arg-pleat-id="{{ pleat.id }}"
+                                arg-pleat-name="{{ pleat.name }}" arg-pleat-price="{{ pleat.price }}">
+                                Добавить
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 {% endblock %}

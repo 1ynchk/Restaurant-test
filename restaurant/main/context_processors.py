@@ -1,4 +1,4 @@
-from .forms import SignInForm, RegistrationForm
+from users.forms import SignInForm, RegistrationForm
 
 def add_sign_in_form(request):
     return {

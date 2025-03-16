@@ -7,13 +7,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const signInBtn = document.getElementById('sign-in-btn')
     const popup = document.querySelectorAll('.popup-sign-in-wrapper')
-    const modal = document.querySelector('.popup-sign-in')
+    const modal = document.querySelectorAll('.popup-sign-in')
     const changeMode = document.getElementById('change-mode')
     const formLogin = document.getElementById('form-login')
     const formRegister = document.getElementById('form-register')
     const popupContainerInscription = document.getElementById('popup-container-incription')
     const submitBtn = document.querySelector('.popup-form-btn')
     const popupTitle = document.getElementById('popup-title')
+    const toRegisterbtn = document.querySelectorAll('.popup-form-btn.to-register')
+
+    toRegisterbtn.forEach(el => {
+        el.addEventListener('click', () => {
+            isActiveBtn = false
+
+            popup.forEach(el => {
+                el.classList.remove('active')
+            })
+        })
+    })
 
     submitBtn.addEventListener('click', () => {
         isActiveBtn = false
@@ -46,9 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     })
 
-    modal.addEventListener('click', (e) => {
-        e.stopPropagation()
+    modal.forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.stopPropagation()
+        })
     })
+
 
     changeMode.addEventListener('click', () => {
         isSignIn = !isSignIn

@@ -14,13 +14,13 @@
             {% if message.tags == 'error' %}
             <img src="{% static 'images/cross.png' %}" />
             <div>{{ message }}</div>
-            <button id="to-register" class="popup-form-btn">
+            <button class="popup-form-btn to-register">
                 Понятно
             </button>
             {% elif message.tags == 'success' %}
             <img class="popup-is-auth-img" src="{% static 'images/arrow_confirm.png' %}" />
             <div>{{ message }}</div>
-            <button id="to-register" class="popup-form-btn">
+            <button class="popup-form-btn to-register">
                 Понятно
             </button>
             {% endif %}

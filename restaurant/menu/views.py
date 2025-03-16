@@ -13,16 +13,16 @@ def menu_page(request):
 def search_pleat(request):
     
     search = request.GET.get('q', '').strip()
-    print(search)
     
     if search:
-        queryset = Menu.objects.filter(name__icontains=search)
+        queryset = Menu.objects.select_related('cat').filter(name__icontains=search)
     else:
         queryset = Menu.objects.all()
         
-    result = list(queryset.values('id', 'name', 'desc', 'price'))
+    result = list(queryset.values('id', 'name', 'desc', 'price', 'cat__name'))
     
     for item in result:
         item['id'] = str(item['id'])
+        item['cat'] = item.pop('cat__name')
         
     return JsonResponse({'results': result})
