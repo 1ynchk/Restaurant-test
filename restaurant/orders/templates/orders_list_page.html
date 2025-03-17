@@ -6,9 +6,9 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/orders-page.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/menu-page.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/orders-list-page.css' %}" />
-<script src="{% static 'js/search.js' %}" defer></script>
 <script src="{% static 'js/delete-order.js' %}" defer></script>
 <script src="{% static 'js/update-status.js' %}" defer></script>
+<script src="{% static 'js/search-order.js' %}" defer></script>
 {% endblock %}
 
 {% block main %}
@@ -46,7 +46,7 @@
             <input class="search-input" type="text" placeholder="Введите статус заказа или номер столика..." />
             <img id="search-btn" class="search-img" alt="search" src="{% static 'images/search.png' %}" />
         </div>
-        <div class="orders-list-container">
+        <div id="orders-list-container" class="orders-list-container">
             {% if orders %}
             {% for order in orders %}
             <div id="pleat-container-order-list-{{ order.id }}" class="pleat-container order-list">
@@ -87,7 +87,6 @@
                                     Сохранить
                                 </button>
                             </div> 
-
                         </div>
                     </ul>
 

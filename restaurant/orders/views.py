@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.db.models import F, Sum
+from django.db.models import F, Sum, Q
 from django.contrib.auth.decorators import login_required
 from collections import Counter
 from django.http import JsonResponse
@@ -48,7 +48,8 @@ def order_delete(request):
         order_obj.delete()
         
         return JsonResponse({'results': 'Заказ успешно удален'})
-
+    
+@login_required
 def order_update(request, order_id):
     '''Обновление статуса заказа'''
     
@@ -67,6 +68,44 @@ def order_update(request, order_id):
         return JsonResponse({'results': 'Статус заказа успешно обновлен'})
     
     return JsonResponse({'error': 'Метод не поддерживается'}, status=405)
+
+@login_required
+def order_search(request):
+    '''Поиск заказа пользователя'''
+   
+    if request.method == 'GET':
+        
+        search = request.GET.get('q', '').strip()
+        if search:
+            queryset = Orders.objects.prefetch_related('items').filter(Q(Q(id=search) | Q(status__icontains=search)) & Q(user=request.user))
+        else:
+            queryset = Orders.objects.all()
+        result = []
+
+        for order in queryset:
+            order_data = {
+                'id': str(order.id),
+                'table_number': order.table_number,
+                'status': order.status,
+                'total_price': order.total_price,
+                'items': []
+            }
+
+            for item_through in order.items.through.objects.filter(order=order):
+                    item = item_through.item 
+                    order_data['items'].append({
+                        'id': str(item.id),
+                        'name': item.name,
+                        'price': item.price,
+                        'amount': item_through.amount
+                    }) 
+
+            result.append(order_data)
+
+        return JsonResponse({'results': result}) 
+        
+    return JsonResponse({'result': f'Метод {request.method} не разрешен'})
+    
    
 @login_required 
 def orders_post(request):
@@ -108,4 +147,5 @@ def orders_post(request):
             
         ItemsMenuThrough.objects.bulk_create(order_items)
                 
-        return JsonResponse({'result': 'Order successfully created'})
+        return JsonResponse({'result': 'Заказ успешно был создан'})
+    return JsonResponse({'result': f'Метод {request.method} не разрешен'})
