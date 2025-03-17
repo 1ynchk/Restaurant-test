@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
+from django.db.models import F, Sum, Q
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required 
 
 from .forms import RegistrationForm, SignInForm
 from users.models import Users
+from orders.models import Orders
 
 # Create your views here.
 def login_view(request): 
@@ -52,4 +55,18 @@ def register_view(request):
             messages.error(request, 'Пароли не совпадают.')
             return redirect ('main-page')
 
- 
+@login_required
+def admin_profit(request):
+    '''Страница выручки'''
+    
+    if not request.user.is_staff:
+        return redirect('main-page')
+
+    queryset = Orders.objects.prefetch_related('items').filter(status='Оплачено')
+    
+    total_sum = 0
+    
+    for obj in queryset:
+        total_sum += obj.total_price
+    
+    return render(request, 'admin_page.html', {'orders': queryset, 'total_sum': total_sum}) 

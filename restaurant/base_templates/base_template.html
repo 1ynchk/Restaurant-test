@@ -6,6 +6,7 @@
     {% load livereload_tags %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main-page.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/footer.css' %}" />
@@ -95,6 +96,13 @@
         <div class="sidebar">
             <img class="close-sidebar" src="{% static 'images/cross.png' %}" />
             <ul class="sidebar-list">
+                {% if user.is_staff %}
+                <a href="{% url 'profit' %}">
+                    <div class="main-page-menu-a no-margin">
+                        Выручка
+                    </div>
+                </a>
+                {% endif %}
                 {% if user.is_authenticated %}
                 <a href="{% url 'orders-list-view' %}">
                     <nav class="header-navigate-el">
@@ -139,6 +147,19 @@
                     Войти
                 </button>
                 {% endif %}
+                <div class="sidebar-contacts">
+                    <div class="footer-address">
+                        Paper Street av. 7 1408
+                    </div>
+                    <a target="_blank" href="https://t.me/ycnhk1" class="footer-containter-anchor">
+                        <img src="{% static 'images/tg.png' %}" class="footer-img" />
+                        <div class="footer-p">Мы в Telegram</div>
+                    </a>
+                    <button id="copy-email-button" class="footer-containter-anchor">
+                        <img src="{% static 'images/email.jpg' %}" class="footer-img" />
+                        <div id="email-copy" class="footer-p">saspery@yandex.ru</div>
+                    </button>
+                </div>
             </ul>
         </div>
     </div>
@@ -153,6 +174,13 @@
                     <div class="header-logo-title">Restaurant</div>
                 </a>
                 <div class="header-navigate">
+                    {% if user.is_staff %}
+                    <a href="{% url 'profit' %}">
+                        <div class="main-page-menu-a no-margin">
+                            Выручка
+                        </div>
+                    </a>
+                    {% endif %}
                     {% if user.is_authenticated %}
                     <a href="{% url 'orders-list-view' %}">
                         <nav class="header-navigate-el">

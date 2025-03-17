@@ -29,9 +29,7 @@ def orders_page(request):
 def orders_list_page(request): 
     '''Возвращает страницу с заказами пользователя'''
 
-    queryset = Orders.objects.prefetch_related('items').filter(user=request.user).annotate(
-        total_sum=Sum(F('itemsmenuthrough__amount') * F('itemsmenuthrough__item__price'))
-    )
+    queryset = Orders.objects.prefetch_related('items').filter(user=request.user)
 
     return render(request, 'orders_list_page.html', {'orders': queryset})
 
@@ -77,7 +75,17 @@ def order_search(request):
         
         search = request.GET.get('q', '').strip()
         if search:
-            queryset = Orders.objects.prefetch_related('items').filter(Q(Q(id=search) | Q(status__icontains=search)) & Q(user=request.user))
+
+            try:
+                int(search)
+            except Exception:
+                queryset = Orders.objects \
+                .prefetch_related('items') \
+                .filter(Q(status__icontains=search) & Q(user=request.user))     
+            else:
+                queryset = Orders.objects \
+                .prefetch_related('items') \
+                .filter(Q(id=search) & Q(user=request.user))
         else:
             queryset = Orders.objects.all()
         result = []
