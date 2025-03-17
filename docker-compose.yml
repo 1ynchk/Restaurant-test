@@ -1,0 +1,53 @@
+version: '3.8'
+
+networks:
+  mynetwork:
+    driver: bridge
+
+services:
+  app:
+    build: .
+    restart: always
+    ports: 
+      - "8000:8000"
+    environment:
+      - DB_NAME=restaurant-db
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_PASSWORD=test123321
+      - DB_USER=postgres
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_EMAIL=admin@example.com
+      - DJANGO_SUPERUSER_PASSWORD=admin123
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./restaurant/staticfiles:/app/staticfiles
+    networks:
+      - mynetwork
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py loaddata initial_data.json &&
+             python manage.py createsuperuser --noinput || true &&
+             gunicorn restaurant.wsgi:application --bind 0.0.0.0:8000"
+
+  db:
+    container_name: db
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test123321
+      POSTGRES_DB: restaurant-db
+    ports:
+      - "5431:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 5
+
+   

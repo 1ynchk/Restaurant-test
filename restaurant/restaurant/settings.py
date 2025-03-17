@@ -12,6 +12,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static" 
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,8 +26,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    # development 
-    'livereload',
     'django.contrib.staticfiles',
     
     # apps
@@ -30,10 +35,6 @@ INSTALLED_APPS = [
     'menu'
 ]
 
-# development
-LIVERELOAD_HOST = '127.0.0.1'
-LIVERELOAD_PORT = '8001'
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -42,9 +43,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
-    # development 
-    "livereload.middleware.LiveReloadScript",
 ]
 
 ROOT_URLCONF = 'restaurant.urls'
@@ -64,10 +62,6 @@ TEMPLATES = [
             ],
         },
     },
-]
-
-STATICFILES_DIRS = [
-    BASE_DIR / "base_static",
 ]
 
 WSGI_APPLICATION = 'restaurant.wsgi.application'
@@ -109,9 +103,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-
-STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
