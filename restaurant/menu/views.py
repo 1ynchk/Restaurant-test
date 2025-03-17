@@ -5,12 +5,14 @@ from .models import Menu
 
 # Create your views here.
 def menu_page(request):
+    '''Возвращает страницу с меню'''
    
     queryset = Menu.objects.select_related('cat').all()
      
     return render(request, 'menu_page.html', {'menu': queryset})
 
 def search_pleat(request):
+    '''Поиск блюда по поиску'''
     
     search = request.GET.get('q', '').strip()
     

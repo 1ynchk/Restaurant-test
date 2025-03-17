@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         warnMessage.innerText = `Произошла ошибка ${response.status}`
                     } else {
                         response.json()
-                        window.location = '/'
+                        window.location = '/orders-list/'
                     }
                 })
         }

@@ -43,8 +43,10 @@
                     Вы можете ознакомиться с меню нашего ночного клуба, где представлены лучшие блюда и закуски для
                     вашего идеального вечера.
                 </p>
-                <a href="{% url 'menu-page' %}" class="main-page-menu-a">
-                    Меню
+                <a href="{% url 'menu-page' %}">
+                    <div class="main-page-menu-a">
+                        Меню
+                    </div>
                 </a>
             </div>
             <img class="main-page-menu-img" alt="menu" src="{% static 'images/menu.png' %}" />
@@ -81,8 +83,10 @@
                 </p>
 
                 {% if user.is_authenticated %}
-                <a href="{% url 'orders-view' %}" class="main-page-menu-a">
-                    К заказу
+                <a href="{% url 'orders-view' %}">
+                    <div class="main-page-menu-a">
+                        К заказу
+                    </div>
                 </a>
                 {% else %}
                 <button id="main-page-nav-login-required" class="main-page-menu-a">

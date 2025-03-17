@@ -6,11 +6,8 @@ from .forms import RegistrationForm, SignInForm
 from users.models import Users
 
 # Create your views here.
-def main_page(request):
-    
-    return render(request, 'main-page.html')
-
 def login_view(request): 
+    '''Авторизация пользователя'''
     
     if request.method == 'POST':
         form =  SignInForm(request.POST)
@@ -32,6 +29,7 @@ def login_view(request):
             return redirect('main-page')
     
 def register_view(request): 
+    '''Регистрация пользователя'''
     
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

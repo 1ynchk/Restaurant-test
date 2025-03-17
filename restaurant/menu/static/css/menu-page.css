@@ -111,3 +111,13 @@
 .pleat-btn-order.orders_page {
     background-color: orange;
 }
+
+@media (max-width: 755px) {
+    .menu-container {
+        justify-content: center;
+    }
+
+    .pleat-container {
+        width: 100%;
+    }
+}

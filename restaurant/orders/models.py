@@ -16,7 +16,7 @@ class Orders(models.Model):
     table_number = models.IntegerField(choices=table_choices)
     items = models.ManyToManyField('menu.Menu', through='ItemsMenuThrough')
     total_price = models.IntegerField()
-    status = models.CharField(max_length=20, choices=status_choices)
+    status = models.CharField(max_length=20, choices=status_choices, default='В ожидании')
     
     def __str__(self):
         return self.user.email   
@@ -24,5 +24,5 @@ class Orders(models.Model):
 class ItemsMenuThrough(models.Model): 
     
     amount = models.PositiveBigIntegerField(default=1)
-    item = models.ForeignKey('menu.Menu', on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Orders, on_delete=models.SET_NULL, null=True)
+    item = models.ForeignKey('menu.Menu', on_delete=models.CASCADE, null=True)
+    order = models.ForeignKey(Orders, on_delete=models.CASCADE, null=True)

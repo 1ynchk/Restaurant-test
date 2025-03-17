@@ -57,6 +57,7 @@ input::-ms-clear {
 button {
     cursor: pointer;
     font-weight: normal;
+    background-color: transparent;
 }
 
 button::-moz-focus-inner {
@@ -83,6 +84,7 @@ img {
 }
 
 body {
+    position: relative;
     height: 100%;
     font-family: "Montserrat", sans-serif;
     position: relative;

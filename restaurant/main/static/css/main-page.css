@@ -53,10 +53,10 @@
     margin-top: 20px;
     font-size: 18px;
     font-weight: 300;
-    margin-bottom: 40px;
 }
 
 .main-page-menu-a {
+    width: fit-content;
     background-color: orange;
     padding: 15px 30px;
     border-radius: 5px;
@@ -83,4 +83,28 @@
     border-radius: 30px;
     height: 10px;
     background-color: orange;
+}
+
+@media (max-width: 950px) {
+    .main-page-wrapper {
+        margin-top: 40px;
+        height: fit-content;
+        flex-direction: column;
+    }
+
+    .main-page-container {
+        height: fit-content;
+        margin-top: 40px;
+        width: 100%;
+        order: 2;
+        justify-content: center;
+    }
+
+    .main-page-menu-img.coffee {
+        width: 80%;
+    }
+
+    .main-page-menu-img {
+        width: 60%;
+    }
 }

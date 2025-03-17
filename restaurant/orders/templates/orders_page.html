@@ -57,13 +57,13 @@
                 </div>
             </div>
         </div>
-        <div class="orders-page-orders-container">
-            <div class="search-container">
+        <div class="orders-page-orders-container orders-page">
+            <div class="search-container orders-page">
                 <input class="search-input" type="text" placeholder="Введите название блюда..." />
                 <img id="search-btn" class="search-img" alt="search" src="{% static 'images/search.png' %}" />
             </div>
             <div class="orders-page-container order-pleats">
-                <div class="menu-container" arg-type="orders-page">
+                <div class="menu-container menu-orders" arg-type="orders-page">
                     {% if menu %}
                     {% for pleat in menu %}
                     <div class="pleat-container order-pleat-container">

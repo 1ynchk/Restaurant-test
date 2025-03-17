@@ -84,14 +84,68 @@
         <div class="popup-sign-in">
             <div class="popup-is-auth-container">
                 <img class="popup-is-auth-img" src="{% static 'images/profile.png' %}" />
-                <div class="popup-is-auth-comment">Для оформления заказа необходимо авторизоваться</div>
+                <div class="popup-is-auth-comment">Для этой вкладки необходимо авторизоваться.</div>
                 <button class="popup-form-btn to-register">
                     Понятно
                 </button>
             </div>
         </div>
     </div>
+    <div class="sidebar-wrapper">
+        <div class="sidebar">
+            <img class="close-sidebar" src="{% static 'images/cross.png' %}" />
+            <ul class="sidebar-list">
+                {% if user.is_authenticated %}
+                <a href="{% url 'orders-list-view' %}">
+                    <nav class="header-navigate-el">
+                        Заказы
+                    </nav>
+                </a>
+                {% else %}
+                <button class="header-nav-btn header-nav-login-required">
+                    <nav class="header-navigate-el">
+                        Заказы
+                    </nav>
+                </button>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <a href="{% url 'orders-view' %}">
+                    <nav class="header-navigate-el">
+                        Оформить заказ
+                    </nav>
+                </a>
+                {% else %}
+                <button class="header-nav-btn header-nav-login-required">
+                    <nav class="header-navigate-el">
+                        Оформить заказ
+                    </nav>
+                </button>
+                {% endif %}
+                <a href="{% url 'menu-page' %}">
+                    <nav class="header-navigate-el">
+                        Меню
+                    </nav>
+                </a>
+                {% if user.is_authenticated %}
+                <form action="{% url 'logout-view' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="header-profile-container sidebar-profile">
+                        <img src="{% static 'images/logout.png' %}" class="profile-drop-list-el-img sidebar-img" />
+                        <div class="profile-drop-list-el-div">Выйти</div>
+                    </button>
+                </form>
+                {% else %}
+                <button class="sign-in-btn sidebar-list">
+                    Войти
+                </button>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
     <div class="header-wrapper">
+        <div class="burger-container">
+            <img class="burger-img" src="{% static 'images/burger.png' %}" />
+        </div>
         <div class="container">
             <header class="header">
                 <a href="{% url 'main-page' %}" class="header-logo-container">
@@ -100,13 +154,26 @@
                 </a>
                 <div class="header-navigate">
                     {% if user.is_authenticated %}
+                    <a href="{% url 'orders-list-view' %}">
+                        <nav class="header-navigate-el">
+                            Заказы
+                        </nav>
+                    </a>
+                    {% else %}
+                    <button class="header-nav-btn header-nav-login-required">
+                        <nav class="header-navigate-el">
+                            Заказы
+                        </nav>
+                    </button>
+                    {% endif %}
+                    {% if user.is_authenticated %}
                     <a href="{% url 'orders-view' %}">
                         <nav class="header-navigate-el">
                             Оформить заказ
                         </nav>
                     </a>
                     {% else %}
-                    <button id="header-nav-login-required" class="header-nav-btn">
+                    <button class="header-nav-btn header-nav-login-required">
                         <nav class="header-navigate-el">
                             Оформить заказ
                         </nav>
@@ -132,9 +199,8 @@
                         </form>
                     </div>
 
-
                     {% else %}
-                    <button id="sign-in-btn" class="header-sign-in">
+                    <button class="sign-in-btn header-sign-in">
                         Войти
                     </button>
                     {% endif %}
